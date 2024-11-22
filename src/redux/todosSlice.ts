@@ -4,13 +4,21 @@ type todosSlice = {
   items: string[];
 };
 
-const initialState: todosSlice = {
-  items: ["item 1", "item 2"],
+const getInitialState = (): todosSlice => {
+  let todos = [] as string[];
+  const todosFromLocalStorage = localStorage.getItem("todos");
+  if (todosFromLocalStorage) {
+    todos = JSON.parse(todosFromLocalStorage) as string[];
+  }
+
+  return {
+    items: todos,
+  };
 };
 
 export const todosSlice = createSlice({
   name: "todos",
-  initialState,
+  initialState: getInitialState(),
   reducers: {
     add: (state, action: PayloadAction<string>) => {
       state.items = [...state.items, action.payload];
@@ -19,6 +27,14 @@ export const todosSlice = createSlice({
       const index = state.items.indexOf(action.payload);
       state.items.splice(index, 1);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      () => true,
+      (state) => {
+        localStorage.setItem("todos", JSON.stringify(state.items));
+      }
+    );
   },
 });
 

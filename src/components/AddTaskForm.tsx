@@ -1,18 +1,22 @@
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { add } from "../redux/todosSlice";
 
 const AddTaskForm = () => {
   const [itemName, setItemName] = useState("");
   const dispatch = useDispatch();
-  const handler = () => {
+  const handler = (e: FormEvent) => {
+    e.preventDefault && e.preventDefault();
     if (!itemName) return;
     dispatch(add(itemName));
     setItemName("");
   };
 
   return (
-    <div className="flex w-full gap-2 items-center justify-center">
+    <form
+      className="flex w-full gap-2 items-center justify-center"
+      onSubmit={handler}
+    >
       <input
         className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
         placeholder="Add Todo"
@@ -27,7 +31,7 @@ const AddTaskForm = () => {
       >
         Add
       </button>
-    </div>
+    </form>
   );
 };
 

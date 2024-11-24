@@ -1,6 +1,13 @@
 // types.ts
+
+export type TodoItem = {
+  id: string;
+  name: string;
+  completed: boolean;
+};
+
 export interface TodosState {
-  items: string[];
+  items: TodoItem[];
 }
 
 export interface RootState {

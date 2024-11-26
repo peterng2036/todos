@@ -4,6 +4,7 @@ export type TodoItem = {
   id: string;
   name: string;
   completed: boolean;
+  index: number;
 };
 
 export interface TodosState {

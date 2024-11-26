@@ -9,7 +9,8 @@ function isTodo(obj: any): obj is TodoItem {
   return (
     typeof obj.id === "string" &&
     typeof obj.name === "string" &&
-    typeof obj.completed === "boolean"
+    typeof obj.completed === "boolean" &&
+    typeof obj.index === "number"
   );
 }
 

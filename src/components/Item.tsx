@@ -11,7 +11,7 @@ const Item = ({ item }: { item: TodoItem }) => {
 
   return (
     <Draggable draggableId={item.id} index={item.index}>
-      {(provided, snapshot) => (
+      {(provided) => (
         <div
           className="rounded overflow-hidden border-orange-200 border w-full p-4 flex"
           ref={provided.innerRef}

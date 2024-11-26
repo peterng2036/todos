@@ -7,7 +7,6 @@ import Item from "./components/Item";
 import {
   DragDropContext,
   Droppable,
-  Draggable,
   DropResult,
 } from "@hello-pangea/dnd";
 import { swap } from "./redux/todosSlice";
@@ -38,7 +37,7 @@ function App() {
       <AddTaskForm />
       <DragDropContext onDragEnd={onDrapEnd}>
         <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
+          {(provided) => (
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}

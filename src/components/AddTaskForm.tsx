@@ -1,36 +1,35 @@
-import { useDispatch } from "react-redux";
-import { FormEvent, useState } from "react";
-import { add } from "../redux/todosSlice";
+import { useDispatch } from 'react-redux';
+import { FormEvent, useState } from 'react';
+import { add } from '../store/todosSlice';
+import Button from './core/Button';
 
 const AddTaskForm = () => {
-  const [itemName, setItemName] = useState("");
+  const [itemName, setItemName] = useState('');
   const dispatch = useDispatch();
-  const handler = (e: FormEvent) => {
+  const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault && e.preventDefault();
+    addItem();
+  };
+
+  const addItem = () => {
     if (!itemName) return;
     dispatch(add(itemName));
-    setItemName("");
+    setItemName('');
   };
 
   return (
     <form
-      className="flex w-full gap-2 items-center justify-center"
-      onSubmit={handler}
+      className="flex w-full items-center justify-center gap-2"
+      onSubmit={onSubmitHandler}
     >
       <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
+        className="text-grey-darker mr-4 w-full appearance-none rounded border px-3 py-2 shadow"
         placeholder="Add Todo"
         type="text"
         value={itemName}
         onChange={(e) => setItemName(e.target.value)}
       />
-      <button
-        onClick={handler}
-        type="button"
-        className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-      >
-        Add
-      </button>
+      <Button onClick={addItem}>Add</Button>
     </form>
   );
 };

@@ -1,15 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import "./App.css";
-import { RootState, TodoItem } from "./redux/type";
-import AddTaskForm from "./components/AddTaskForm";
-import Item from "./components/Item";
+import { useDispatch, useSelector } from 'react-redux';
+import './App.css';
+import { RootState, TodoItem } from './store/type';
+import AddTaskForm from './components/AddTaskForm';
+import Item from './components/Item';
 
-import {
-  DragDropContext,
-  Droppable,
-  DropResult,
-} from "@hello-pangea/dnd";
-import { swap } from "./redux/todosSlice";
+import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
+import { swap } from './store/todosSlice';
 
 function App() {
   const items = useSelector((state: RootState) => state.todos.items);
@@ -33,7 +29,7 @@ function App() {
   };
 
   return (
-    <div className="p-12 flex flex-col gap-8 max-w-4xl m-auto min-w-96">
+    <div className="m-auto flex min-w-96 max-w-4xl flex-col gap-8 p-12">
       <AddTaskForm />
       <DragDropContext onDragEnd={onDrapEnd}>
         <Droppable droppableId="droppable">
